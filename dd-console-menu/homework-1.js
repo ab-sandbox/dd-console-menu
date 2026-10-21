@@ -41,6 +41,27 @@ function printTicketResult(category, budget) {
   );
 }
 
+function deliveryPrice(distance, total) {
+  if (total >= 3000 || distance <= 3) {
+    return 0;
+  }
+
+  if (distance <= 10) {
+    return 200;
+  }
+
+  return 200 + (distance - 10) * 25;
+}
+
+function printDelivery(distance, total) {
+  const price = deliveryPrice(distance, total);
+
+  console.log(
+    `Расстояние ${distance} км, заказ ${total} руб.: ` +
+      `доставка ${price} руб.`,
+  );
+}
+
 async function main() {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -63,7 +84,10 @@ async function main() {
       break;
     }
     case 2: {
-      console.log("Доставка заказа");
+      const distance = Number(await rl.question("Расстояние (км): "));
+      const total = Number(await rl.question("Сумма заказа: "));
+
+      printDelivery(distance, total);
       break;
     }
     case 3: {
