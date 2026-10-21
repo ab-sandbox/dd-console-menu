@@ -62,6 +62,26 @@ function printDelivery(distance, total) {
   );
 }
 
+function printSteps(height) {
+  let count = 0;
+
+  for (let step = 1; step <= height; step++) {
+    if (step > 10) {
+      console.log("Дальше лестница не построена");
+      break;
+    }
+
+    if (step === 4) {
+      continue;
+    }
+
+    console.log(`Ступень ${step}`);
+    count++;
+  }
+
+  console.log(`Всего построено: ${count}`);
+}
+
 async function main() {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -91,7 +111,9 @@ async function main() {
       break;
     }
     case 3: {
-      console.log("Лестница");
+      const height = Number(await rl.question("Высота лестницы: "));
+
+      printSteps(height);
       break;
     }
     default:
